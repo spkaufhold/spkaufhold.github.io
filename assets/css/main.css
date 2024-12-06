@@ -593,31 +593,31 @@ input, select, textarea {
 					padding-top: 4rem;
 				}
 
-		/* Video container styling for responsive video */
-		.video-container {
-		    position: relative;
-		    width: 100%;
-		    max-height: 500px; /* Set a maximum height for the video container */
-		    overflow: hidden;
-		    background-color: black; /* Fallback for debugging or if video fails to load */
-		}
-		
-		.video-container video {
-		    position: absolute;
-		    top: 50%;
-		    left: 50%;
-		    transform: translate(-50%, -50%);
-		    min-width: 100%;
-		    min-height: 100%;
-		    object-fit: cover; /* Ensures the video fills the container proportionally */
-		}
-		
-		/* Ensure responsiveness for smaller screens */
-		@media (max-width: 768px) {
-		    .video-container {
-		        max-height: 300px; /* Adjust max height for smaller devices */
-		    }
-		}
+	/* Fixing the video container to align with the existing template */
+			.video-container {
+			    position: relative;
+			    width: 100%;
+			    height: auto; /* Allow height to adjust naturally */
+			    overflow: hidden;
+			}
+			
+			.video-container video {
+			    width: 100%; /* Scale video to fit the width of the container */
+			    height: auto; /* Maintain aspect ratio */
+			    display: block; /* Ensure no inline space below video */
+			    object-fit: cover; /* Crop to fill the container, if necessary */
+			}
+			
+			/* Responsive adjustments for smaller screens */
+			@media (max-width: 768px) {
+			    .video-container {
+			        height: auto; /* Allow natural resizing on smaller devices */
+			    }
+			    .video-container video {
+			        width: 100%;
+			        height: auto;
+			    }
+}
 
 		@media screen and (max-width: 1680px) {
 
