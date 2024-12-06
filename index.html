@@ -101,6 +101,14 @@
 					    overflow: hidden;
 					}
 					
+					.video-container {
+					    position: relative;
+					    width: 100%;
+					    height: 100%;
+					    overflow: hidden;
+					    background-color: black; /* Helps debug white space */
+					}
+					
 					.video-container video {
 					    position: absolute;
 					    top: 50%;
@@ -108,8 +116,8 @@
 					    transform: translate(-50%, -50%);
 					    width: 100%;
 					    height: 100%;
-					    object-fit: cover; /* Ensures the video fills the container while maintaining aspect ratio */
-					    z-index: 1;
+					    object-fit: cover;
+					    display: block; /* Ensures the video is displayed */
 					}
 					
 					/* Responsiveness for smaller screens */
