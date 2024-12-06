@@ -2583,6 +2583,36 @@ input, select, textarea {
 
 /* Icon */
 
+	.banner .content {
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: center;
+		    height: 100%; /* Ensures it matches the video block height */
+		}
+		
+		.banner .image {
+		    position: relative;
+		    width: 50%; /* Matches the text block width */
+		    height: 100%; /* Matches the height of the text block */
+		    overflow: hidden;
+		}
+		
+		.banner .image video {
+		    position: absolute;
+		    top: 50%;
+		    left: 50%;
+		    transform: translate(-50%, -50%);
+		    width: 100%;
+		    height: 100%;
+		    object-fit: cover; /* Ensures video fills the container, cropping if necessary */
+		}
+		
+		/* Ensure the section alignment (corners touching) */
+		.banner.style1 {
+		    display: flex;
+		    align-items: stretch;
+		    justify-content: space-between;
+	}
 	.icon {
 		text-decoration: none;
 		border-bottom: none;
