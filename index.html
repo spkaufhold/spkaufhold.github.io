@@ -33,9 +33,66 @@
 		  gtag('js', new Date());
 		  gtag('config', 'G-5CY4ECQKKT');
 		</script>
+		<style>
+		  /* Day/Night toggle switch */
+		  .theme-toggle {
+		    position: fixed;
+		    top: 1rem;
+		    right: 1rem;
+		    z-index: 10000;
+		    display: flex;
+		    align-items: center;
+		    gap: 0.5em;
+		    font-family: "Source Sans Pro", Helvetica, sans-serif;
+		    font-size: 0.8rem;
+		    font-weight: 300;
+		    cursor: pointer;
+		    user-select: none;
+		  }
+		  .theme-toggle .toggle-track {
+		    width: 44px;
+		    height: 24px;
+		    border-radius: 12px;
+		    background: rgba(0,0,0,0.2);
+		    position: relative;
+		    transition: background 0.3s;
+		  }
+		  .theme-toggle .toggle-knob {
+		    width: 18px;
+		    height: 18px;
+		    border-radius: 50%;
+		    background: #fff;
+		    position: absolute;
+		    top: 3px;
+		    left: 3px;
+		    transition: transform 0.3s;
+		    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+		  }
+		  /* When dark mode is active */
+		  body.dark-mode .theme-toggle .toggle-track {
+		    background: rgba(255,255,255,0.3);
+		  }
+		  body.dark-mode .theme-toggle .toggle-knob {
+		    transform: translateX(20px);
+		  }
+		  .theme-toggle .toggle-label {
+		    color: #000;
+		    transition: color 0.3s;
+		  }
+		  body.dark-mode .theme-toggle .toggle-label {
+		    color: #fff;
+		  }
+		</style>
 	</head>
 	<body class="is-preload">
 
+		<!-- Theme toggle -->
+			<div class="theme-toggle" onclick="toggleTheme()">
+			  <span class="toggle-label">☀︎ / ☾</span>
+			  <div class="toggle-track">
+			    <div class="toggle-knob"></div>
+			  </div>
+			</div>
 		<!-- Wrapper -->
 			<div id="wrapper" class="divided">
 
@@ -202,7 +259,53 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+		    <!-- Day/Night Theme -->
+			<script>
+			  (function() {
+			    // Check if user previously chose a mode
+			    var saved = localStorage.getItem('theme-preference');
+			    var isNight;
+			
+			    if (saved) {
+			      isNight = (saved === 'dark');
+			    } else {
+			      // Auto-detect: night = 7 PM (19:00) through 6:59 AM
+			      var hour = new Date().getHours();
+			      isNight = (hour >= 19 || hour < 7);
+			    }
+			
+			    if (isNight) applyDark();
+			  })();
+			
+			  function applyDark() {
+			    document.body.classList.add('dark-mode');
+			    document.body.style.backgroundColor = '#000000';
+			    var children = document.getElementById('wrapper').children;
+			    for (var i = 0; i < children.length; i++) {
+			      children[i].classList.add('invert');
+			    }
+			  }
+			
+			  function applyLight() {
+			    document.body.classList.remove('dark-mode');
+			    document.body.style.backgroundColor = '#ffffff';
+			    var children = document.getElementById('wrapper').children;
+			    for (var i = 0; i < children.length; i++) {
+			      children[i].classList.remove('invert');
+			    }
+			  }
+			
+			  function toggleTheme() {
+			    var isDark = document.body.classList.contains('dark-mode');
+			    if (isDark) {
+			      applyLight();
+			      localStorage.setItem('theme-preference', 'light');
+			    } else {
+			      applyDark();
+			      localStorage.setItem('theme-preference', 'dark');
+			    }
+			  }
+			</script>
 	</body>
 </html>
 
