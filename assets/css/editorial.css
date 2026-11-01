@@ -1,4 +1,4 @@
-/* Text and publication refinements for the second website version. */
+/* Text and publication refinements for website version 3. */
 #first .content,
 #current-projects .content,
 #background .content {
@@ -88,4 +88,20 @@
 	color: var(--publication-muted);
 	font-size: 0.8rem;
 	font-style: italic;
+}
+
+/* A slightly smaller reading size for longer copy on larger screens.
+   Phone sizes continue to use the original template's type scale. */
+@media screen and (min-width: 737px) {
+	#wrapper > .banner:first-child p.major {
+		font-size: 1.125rem;
+		line-height: 1.65;
+	}
+
+	#first .content > p,
+	#current-projects .content > p,
+	#background .content > p {
+		font-size: 0.95rem;
+		line-height: 1.7;
+	}
 }
