@@ -1,4 +1,4 @@
-/* Text, publication, and responsive layout refinements for website version 4. */
+/* Text, publication, and responsive layout refinements for website version 5. */
 #first .content,
 #current-projects .content,
 #background .content {
@@ -98,16 +98,33 @@
 		font-size: clamp(1rem, calc(0.75rem + 0.3125vw), 1.125rem);
 	}
 
+	/* Use more of a tall desktop panel without inflating text in short windows. */
+	#wrapper {
+		--reading-size: clamp(0.97rem, calc(0.74rem + 0.5vh), 1.08rem);
+		--reading-size: clamp(0.97rem, calc(0.74rem + 0.5svh), 1.08rem);
+		--intro-size: clamp(1.125rem, calc(0.92rem + 0.45vh), 1.25rem);
+		--intro-size: clamp(1.125rem, calc(0.92rem + 0.45svh), 1.25rem);
+	}
+
+	#wrapper > .banner:first-child h1 {
+		margin-bottom: clamp(1.8rem, 4.5vh, 3rem);
+		margin-bottom: clamp(1.8rem, 4.5svh, 3rem);
+	}
+
 	#wrapper > .banner:first-child p.major {
-		font-size: 1.09rem;
+		font-size: var(--intro-size);
 		line-height: 1.65;
 	}
 
 	#first .content > p,
 	#current-projects .content > p,
 	#background .content > p {
-		font-size: 0.92rem;
+		font-size: var(--reading-size);
 		line-height: 1.7;
+	}
+
+	#first .indented-list li {
+		font-size: var(--reading-size);
 	}
 
 	/* Smooth spacing for the media, publications, contact, and footer areas. */
@@ -142,5 +159,17 @@
 
 	#wrapper > .banner.style1 .content > :last-child {
 		margin-bottom: 0;
+	}
+
+	/* Bound the line length on wide screens; added type size uses panel height. */
+	#wrapper > .banner:first-child p.major {
+		max-width: 56ch;
+	}
+
+	#first .content > p,
+	#first .indented-list,
+	#current-projects .content > p,
+	#background .content > p {
+		max-width: 68ch;
 	}
 }
