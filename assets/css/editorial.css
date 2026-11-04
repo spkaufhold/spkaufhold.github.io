@@ -1,4 +1,4 @@
-/* Text and publication refinements for website version 3. */
+/* Text, publication, and responsive layout refinements for website version 4. */
 #first .content,
 #current-projects .content,
 #background .content {
@@ -90,18 +90,57 @@
 	font-style: italic;
 }
 
-/* A slightly smaller reading size for longer copy on larger screens.
-   Phone sizes continue to use the original template's type scale. */
+/* Keep the template's phone typography and layout. On larger viewports,
+   replace its abrupt 16px / 18.67px / 24px steps with a capped, fluid scale.
+   rem bounds keep the scale responsive to the reader's default font size. */
 @media screen and (min-width: 737px) {
+	html {
+		font-size: clamp(1rem, calc(0.75rem + 0.3125vw), 1.125rem);
+	}
+
 	#wrapper > .banner:first-child p.major {
-		font-size: 1.125rem;
+		font-size: 1.09rem;
 		line-height: 1.65;
 	}
 
 	#first .content > p,
 	#current-projects .content > p,
 	#background .content > p {
-		font-size: 0.95rem;
+		font-size: 0.92rem;
 		line-height: 1.7;
+	}
+
+	/* Smooth spacing for the media, publications, contact, and footer areas. */
+	#wrapper > .wrapper.style1 > .inner {
+		padding: clamp(2.5rem, 6vh, 5rem) clamp(2rem, 4vw, 4.5rem);
+		padding-block: clamp(2.5rem, 6svh, 5rem);
+	}
+}
+
+/* A screen is a minimum for the four main panels, rather than a fixed height.
+   Text can always expand the panel; tablet portrait and phone layouts retain
+   the template's natural image-and-text flow. */
+@media screen and (min-width: 737px) and (orientation: landscape) {
+	#wrapper > .banner.style1 {
+		min-height: 100vh;
+		min-height: 100svh;
+	}
+
+	#wrapper > .banner.style1 .content {
+		padding: clamp(1.75rem, 5vh, 4rem) clamp(2.5rem, 4.25vw, 6rem);
+		padding-block: clamp(1.75rem, 5svh, 4rem);
+	}
+
+	#wrapper > .banner.style1 .content > p {
+		margin-bottom: clamp(1rem, 2.75vh, 1.75rem);
+		margin-bottom: clamp(1rem, 2.75svh, 1.75rem);
+	}
+
+	#wrapper > .banner.style1 .content > .research-questions-intro {
+		margin-bottom: 1.5rem;
+	}
+
+	#wrapper > .banner.style1 .content > :last-child {
+		margin-bottom: 0;
 	}
 }
